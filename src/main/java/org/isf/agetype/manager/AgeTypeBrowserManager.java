@@ -120,6 +120,17 @@ public class AgeTypeBrowserManager {
 				errors.add(new OHExceptionMessage(MessageBundle.getMessage("angal.agetype.somerangesarenotdefinedpleasecheckthevalues.msg")));
 			}
 		}
+
+		// Check if the age range is valid
+		for (AgeType ageType : ageTypes) {
+		    if (ageType.getFrom() > ageType.getTo()) {
+		        errors.add(new OHExceptionMessage(
+		            MessageBundle.getMessage("angal.agetype.invalidrange.msg") 
+		            + " (From: " + ageType.getFrom() + ", To: " + ageType.getTo() + ")"
+		        ));
+		    }
+		}
+
 		if (!errors.isEmpty()) {
 			throw new OHDataValidationException(errors);
 		}
